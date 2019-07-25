@@ -81,7 +81,7 @@
                     <navigationItem key="navigationItem" id="yNJ-oY-Xqs">
                         <barButtonItem key="leftBarButtonItem" title="Change Theme" id="uFD-9j-SnK">
                             <connections>
-                                <segue destination="NMi-53-baU" kind="presentation" id="h0i-9n-uhk"/>
+                                <segue destination="NMi-53-baU" kind="presentation" identifier="ThemeSegue" id="h0i-9n-uhk"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eVr-ew-8HJ">

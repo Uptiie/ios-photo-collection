@@ -91,9 +91,9 @@
 		637CC04522EA443800E0BE0D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				637CC03A22EA3FC500E0BE0D /* ThemeHelper.swift */,
 				637CC03622EA3DD600E0BE0D /* Photo.swift */,
 				637CC03822EA3E2600E0BE0D /* PhotoController.swift */,
-				637CC03A22EA3FC500E0BE0D /* ThemeHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

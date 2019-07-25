@@ -19,8 +19,12 @@ class ThemeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func lightButtonTapped(_ sender: Any) {
+        themeHelper?.setThemePreferenceToLight()
+        dismiss(animated: true, completion: nil)
     }
     @IBAction func darkButtonTapped(_ sender: Any) {
+        themeHelper?.setThemePreferenceToDark()
+        dismiss(animated: true, completion: nil)
     }
     
 }
