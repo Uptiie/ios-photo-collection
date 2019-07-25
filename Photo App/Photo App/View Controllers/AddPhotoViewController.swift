@@ -9,7 +9,7 @@
 import UIKit
 
 class AddPhotoViewController: UIViewController {
-
+    
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var imageTitleTextField: UITextField!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -20,13 +20,36 @@ class AddPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        updateViews()
+        
+        
     }
-
+    
     @IBAction func addButtonTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        present(imagePicker, animated: true, completion: nil)
+        
+        
     }
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let title = imageTitleTextField.text, let imageData = photoImageView.image?.pngData() else {return}
+        
+        
+        if let photo = photo {
+            
+            updateViews()
+            navigationController?.popViewController(animated: true)
+            
+        } else {
+            
+            let photoS = Photo(imageData: imageData, title: title)
+            photoController!.createPhoto(photo: photoS)
+            navigationController?.popViewController(animated: true)
+            
+        }
     }
     
     
@@ -42,4 +65,31 @@ class AddPhotoViewController: UIViewController {
         
     }
     
+    func updateViews() {
+        setTheme()
+        guard let photo = photo, let imageTitle = imageTitleTextField.text else {return}
+        photoImageView.image = UIImage(data: photo.imageData)
+        imageTitleTextField.text = imageTitle
+    }
+    
 }
+
+extension AddPhotoViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard  let imageURL = info[.imageURL] as? URL else {return}
+        
+        guard   let data = try? Data.init(contentsOf: imageURL) else {return}
+        photoImageView.image = UIImage(data: data)
+       
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension AddPhotoViewController: UINavigationControllerDelegate {}
+
+

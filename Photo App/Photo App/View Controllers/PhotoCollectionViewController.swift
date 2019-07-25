@@ -19,11 +19,14 @@ class PhotoCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
        setTheme()
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
       
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        collectionView.reloadData()
+        setTheme()
+    }
     
     // MARK: - Navigation
 
@@ -56,7 +59,7 @@ class PhotoCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
@@ -79,9 +82,12 @@ class PhotoCollectionViewController: UICollectionViewController {
         guard let theme = themeHelper.themePreference else {return}
         
         if theme == "Dark" {
-            view.backgroundColor = #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)
+            collectionView.backgroundColor  = #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)
+           
+           
         } else {
-            view.backgroundColor = #colorLiteral(red: 0.2626167812, green: 0.5972863502, blue: 0.9132495241, alpha: 1)
+            collectionView.backgroundColor = #colorLiteral(red: 0.2626167812, green: 0.5972863502, blue: 0.9132495241, alpha: 1)
+            
         }
         
         
